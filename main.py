@@ -1,12 +1,19 @@
 import mlflow
 import os
 import hydra
+import wandb
 from omegaconf import DictConfig, OmegaConf
 
 
 # This automatically reads in the configuration
 @hydra.main(config_name='config')
 def go(config: DictConfig):
+
+    wandb.config = OmegaConf.to_container(
+         config, 
+         resolve=True, 
+         throw_on_missing=True
+    )
 
     # Setup the wandb experiment. All runs will be grouped under this name
     os.environ["WANDB_PROJECT"] = config["main"]["project_name"]
@@ -63,6 +70,7 @@ def go(config: DictConfig):
         )
 
     if "segregate" in steps_to_execute:
+
         _ = mlflow.run(
             os.path.join(root_path, "segregate"),
             "main",
@@ -75,7 +83,6 @@ def go(config: DictConfig):
             },
         )
         
-
     if "random_forest" in steps_to_execute:
 
         # Serialize decision tree configuration
@@ -96,7 +103,6 @@ def go(config: DictConfig):
                 "stratify": config["data"]["stratify"]
             },    
          )
-
 
     if "evaluate" in steps_to_execute:
 
