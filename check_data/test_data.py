@@ -12,7 +12,6 @@ def test_column_presence_and_type(data):
         "key": pd.api.types.is_integer_dtype,
         "danceability": pd.api.types.is_float_dtype,
         "energy": pd.api.types.is_float_dtype,
-        "loudness": pd.api.types.is_float_dtype,
         "speechiness": pd.api.types.is_float_dtype,
         "acousticness": pd.api.types.is_float_dtype,
         "instrumentalness": pd.api.types.is_float_dtype,
@@ -69,7 +68,6 @@ def test_column_ranges(data):
         "key": (0, 11),
         "danceability": (0, 1),
         "energy": (0, 1),
-        "loudness": (-35, 5),
         "speechiness": (0, 1),
         "acousticness": (0, 1),
         "instrumentalness": (0, 1),
@@ -94,7 +92,6 @@ def test_kolmogorov_smirnov(data, ks_alpha):
     columns = [
         "danceability",
         "energy",
-        "loudness",
         "speechiness",
         "acousticness",
         "instrumentalness",

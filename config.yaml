@@ -50,7 +50,6 @@ random_forest_pipeline:
     numerical:
       - "danceability"
       - "energy"
-      - "loudness"
       - "speechiness"
       - "acousticness"
       - "instrumentalness"
